@@ -9,9 +9,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Gradle
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build
         run: ./gradlew build
-      - name: Gradle
+      - name: Test
         run: ./gradlew test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
