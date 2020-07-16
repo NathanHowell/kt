@@ -8,5 +8,6 @@ internal class ApplicationTest {
 
     @Test
     fun main() {
+        Application.main(arrayOf())
     }
 }
